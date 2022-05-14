@@ -11,17 +11,15 @@ import com.lucas.cursomc.domain.Pedido;
 import com.lucas.cursomc.services.PedidoService;
 
 @RestController
-@RequestMapping(value = "/pedidos")
+@RequestMapping(value="/pedidos")
 public class PedidoResource {
-
+	
 	@Autowired
 	private PedidoService service;
-
-	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+	
+	@RequestMapping(value="/{id}", method=RequestMethod.GET)
 	public ResponseEntity<?> find(@PathVariable Integer id) {
 		Pedido obj = service.buscar(id);
 		return ResponseEntity.ok().body(obj);
-
 	}
-
 }

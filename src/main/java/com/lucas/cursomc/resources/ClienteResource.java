@@ -11,17 +11,15 @@ import com.lucas.cursomc.domain.Cliente;
 import com.lucas.cursomc.services.ClienteService;
 
 @RestController
-@RequestMapping(value = "/clientes")
+@RequestMapping(value="/clientes")
 public class ClienteResource {
-
+	
 	@Autowired
 	private ClienteService service;
-
-	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+	
+	@RequestMapping(value="/{id}", method=RequestMethod.GET)
 	public ResponseEntity<?> find(@PathVariable Integer id) {
 		Cliente obj = service.buscar(id);
 		return ResponseEntity.ok().body(obj);
-
 	}
-
 }

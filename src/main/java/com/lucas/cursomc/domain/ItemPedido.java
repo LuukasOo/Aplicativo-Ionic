@@ -1,7 +1,6 @@
 package com.lucas.cursomc.domain;
 
 import java.io.Serializable;
-import java.util.Objects;
 
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
@@ -11,17 +10,16 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 public class ItemPedido implements Serializable {
 	private static final long serialVersionUID = 1L;
-
+	
 	@JsonIgnore
 	@EmbeddedId
 	private ItemPedidoPK id = new ItemPedidoPK();
-
+	
 	private Double desconto;
 	private Integer quantidade;
 	private Double preco;
-
+	
 	public ItemPedido() {
-
 	}
 
 	public ItemPedido(Pedido pedido, Produto produto, Double desconto, Integer quantidade, Double preco) {
@@ -37,12 +35,11 @@ public class ItemPedido implements Serializable {
 	public Pedido getPedido() {
 		return id.getPedido();
 	}
-
-	@JsonIgnore
+	
 	public Produto getProduto() {
-		return getProduto();
+		return id.getProduto();
 	}
-
+	
 	public ItemPedidoPK getId() {
 		return id;
 	}
@@ -77,7 +74,10 @@ public class ItemPedido implements Serializable {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(id);
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		return result;
 	}
 
 	@Override
@@ -89,7 +89,12 @@ public class ItemPedido implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		ItemPedido other = (ItemPedido) obj;
-		return Objects.equals(id, other.id);
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		return true;
 	}
-
+	
 }
